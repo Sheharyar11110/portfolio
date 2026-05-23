@@ -4,6 +4,7 @@ import gsap from 'gsap'
 import { Bot, Layers, Rocket, Globe } from 'lucide-react'
 import { profile } from '../data/profile'
 import SectionHeading from '../components/ui/SectionHeading'
+import profilePhoto from '../assets/profile.jpg'
 
 const stats = [
   { value: 50, suffix: '+', label: 'Projects shipped', icon: Rocket, color: '#7c5cff' },
@@ -66,9 +67,9 @@ export default function About() {
             <div className="absolute -inset-4 bg-gradient-to-br from-violet/30 via-cyan/20 to-pink/20 rounded-3xl blur-2xl animate-pulse" />
             <div className="relative glass rounded-3xl p-2 glow-violet">
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
+                src={profilePhoto}
                 alt={profile.name}
-                className="w-full aspect-[4/5] object-cover rounded-2xl"
+                className="w-full aspect-[4/5] object-cover object-top rounded-2xl"
                 loading="lazy"
               />
             </div>
