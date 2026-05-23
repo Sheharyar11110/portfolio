@@ -48,31 +48,45 @@ export default function AIAgents() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.08, duration: 0.6 }}
               whileHover={{ y: -12, rotateY: 5 }}
-              className="glass rounded-3xl p-8 relative overflow-hidden group"
+              className="rounded-3xl relative overflow-hidden group min-h-[320px] flex flex-col"
               style={{ transformStyle: 'preserve-3d' }}
             >
-              <div
-                className="absolute -top-20 -right-20 w-40 h-40 rounded-full blur-3xl opacity-40 group-hover:opacity-70 transition-opacity"
-                style={{ background: agent.color }}
-              />
-              <span className="text-4xl">{agent.icon}</span>
-              <h3 className="font-display text-xl font-semibold mt-4">{agent.name}</h3>
-              <p className="text-xs uppercase tracking-widest mt-1" style={{ color: agent.color }}>
-                {agent.role}
-              </p>
-              <p className="text-silver text-sm mt-4 leading-relaxed">{agent.description}</p>
-              <div className="flex flex-wrap gap-2 mt-6">
-                {agent.stack.map((s) => (
-                  <span
-                    key={s}
-                    className="text-[10px] px-2.5 py-1 rounded-full border border-white/10"
-                  >
-                    {s}
-                  </span>
-                ))}
+              {agent.image && (
+                <>
+                  <img
+                    src={agent.image}
+                    alt={agent.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `linear-gradient(to top, rgba(12,10,20,0.95) 0%, rgba(12,10,20,0.7) 55%, ${agent.color}33 100%)`,
+                    }}
+                  />
+                </>
+              )}
+              <div className="relative z-10 p-8 flex flex-col flex-1 justify-end">
+                <span className="text-4xl">{agent.icon}</span>
+                <h3 className="font-display text-xl font-semibold mt-4">{agent.name}</h3>
+                <p className="text-xs uppercase tracking-widest mt-1" style={{ color: agent.color }}>
+                  {agent.role}
+                </p>
+                <p className="text-silver text-sm mt-4 leading-relaxed">{agent.description}</p>
+                <div className="flex flex-wrap gap-2 mt-6">
+                  {agent.stack.map((s) => (
+                    <span
+                      key={s}
+                      className="text-[10px] px-2.5 py-1 rounded-full border border-white/20 bg-black/30"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
               </div>
               <motion.div
-                className="absolute bottom-0 left-0 h-1 rounded-full"
+                className="absolute bottom-0 left-0 h-1 rounded-full z-20"
                 style={{ background: agent.color }}
                 initial={{ width: 0 }}
                 whileInView={{ width: '100%' }}

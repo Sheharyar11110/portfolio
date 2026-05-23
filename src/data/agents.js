@@ -8,6 +8,8 @@ export const aiAgents = [
     color: '#7c5cff',
     icon: '🧠',
     stack: ['FastAPI', 'Redis', 'Kafka'],
+    image:
+      'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80&auto=format&fit=crop',
   },
   {
     id: 'research',
@@ -18,6 +20,8 @@ export const aiAgents = [
     color: '#22d3ee',
     icon: '🔍',
     stack: ['Python', 'PostgreSQL', 'Redis'],
+    image:
+      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80&auto=format&fit=crop',
   },
   {
     id: 'code',
@@ -28,6 +32,8 @@ export const aiAgents = [
     color: '#34d399',
     icon: '⚡',
     stack: ['FastAPI', 'Docker', 'Kafka'],
+    image:
+      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80&auto=format&fit=crop',
   },
   {
     id: 'support',
@@ -38,6 +44,8 @@ export const aiAgents = [
     color: '#f472b6',
     icon: '💬',
     stack: ['FastAPI', 'PostgreSQL', 'Redis'],
+    image:
+      'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=1200&q=80&auto=format&fit=crop',
   },
   {
     id: 'analytics',
@@ -48,5 +56,7 @@ export const aiAgents = [
     color: '#fb923c',
     icon: '📊',
     stack: ['Python', 'PostgreSQL', 'Kafka'],
+    image:
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&auto=format&fit=crop',
   },
 ]

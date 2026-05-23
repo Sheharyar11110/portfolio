@@ -7,37 +7,41 @@ import { aiAgents } from '../data/agents'
 
 function HorizontalCard({ item, type }) {
   const isAgent = type === 'agent'
+  const title = item.name || item.title
 
   return (
     <motion.article
       whileHover={{ scale: 1.03, rotateY: 2 }}
       transition={{ type: 'spring', stiffness: 300 }}
-      className="relative shrink-0 w-[85vw] md:w-[420px] lg:w-[480px] h-[520px] rounded-3xl overflow-hidden card-shine group cursor-pointer"
-      style={{
-        background: isAgent
-          ? `linear-gradient(160deg, ${item.color}22, rgba(12,10,20,0.9))`
-          : undefined,
-      }}
+      className="relative shrink-0 w-[85vw] md:w-[420px] lg:w-[480px] h-[520px] rounded-3xl overflow-hidden card-shine group cursor-pointer bg-graphite-soft"
     >
-      {!isAgent && (
+      {item.image && (
         <>
           <img
             src={item.image}
-            alt={item.title}
+            alt={title}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/50 to-transparent" />
+          <div
+            className="absolute inset-0 bg-gradient-to-t from-graphite via-graphite/70 to-graphite/20"
+            style={
+              isAgent
+                ? {
+                    background: `linear-gradient(to top, rgba(12,10,20,0.95) 0%, rgba(12,10,20,0.75) 45%, ${item.color}33 100%)`,
+                  }
+                : undefined
+            }
+          />
+          {isAgent && (
+            <div
+              className="absolute inset-0 mix-blend-overlay opacity-50"
+              style={{
+                background: `radial-gradient(circle at 70% 20%, ${item.color}66, transparent 55%)`,
+              }}
+            />
+          )}
         </>
-      )}
-
-      {isAgent && (
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            background: `radial-gradient(circle at 30% 30%, ${item.color}, transparent 60%)`,
-          }}
-        />
       )}
 
       <div className="relative h-full flex flex-col justify-end p-8 z-10">
