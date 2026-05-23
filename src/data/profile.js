@@ -1,0 +1,20 @@
+export const profile = {
+  name: 'Sheharyar Liaqat',
+  shortName: 'Sheharyar',
+  initials: 'SL',
+  title: 'Full Stack Developer',
+  tagline: 'AI agents · FastAPI backends · React & 3D web',
+  location: 'Available Worldwide · Remote',
+  email: 'hello@sheharyar.dev',
+  github: 'https://github.com',
+  linkedin: 'https://linkedin.com',
+  bio: `I'm Sheharyar Liaqat — a Full Stack Developer who builds production systems end-to-end: Python FastAPI services, event-driven Kafka pipelines, Dockerized deployments, and autonomous AI agents.`,
+  extendedBio: `I architect scalable backends with FastAPI, PostgreSQL, Redis, and Kafka — then craft polished React, Next.js, and Three.js frontends on top. From containerized microservices to multi-agent orchestration, I ship systems that are fast, observable, and built to scale.`,
+  highlights: [
+    'Python · FastAPI · PostgreSQL',
+    'Docker · Redis · Kafka',
+    'Autonomous AI agent systems',
+    'React · Three.js · Full-stack SaaS',
+  ],
+  backendStack: ['Python', 'FastAPI', 'Docker', 'Redis', 'Kafka', 'PostgreSQL'],
+}

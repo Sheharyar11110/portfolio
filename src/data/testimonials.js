@@ -2,22 +2,22 @@ export const testimonials = [
   {
     id: '1',
     quote:
-      'An exceptional blend of technical mastery and refined aesthetics. Every interaction feels intentional and premium.',
-    author: 'Sarah Chen',
-    role: 'Creative Director, Meridian',
+      'Sheharyar built our entire AI agent stack in weeks. The orchestration layer alone saved us hundreds of engineering hours.',
+    author: 'Ahmed Khan',
+    role: 'CTO, AgentFlow',
   },
   {
     id: '2',
     quote:
-      'Delivered beyond expectations — our product launch site set a new standard for our brand presence.',
-    author: 'Marcus Webb',
-    role: 'VP Product, Aurora Finance',
+      'Rare developer who ships beautiful 3D frontends AND bulletproof NestJS backends. Our product launch was flawless.',
+    author: 'Maria Santos',
+    role: 'Product Lead, Nexus Commerce',
   },
   {
     id: '3',
     quote:
-      'Rare talent who understands both the craft of engineering and the art of luxury design.',
-    author: 'Elena Rossi',
-    role: 'Founder, Lumen Studio',
+      'The support agent he deployed handles 70% of tickets autonomously. ROI was visible within the first month.',
+    author: 'James Okafor',
+    role: 'Founder, HealthAI Assist',
   },
 ]

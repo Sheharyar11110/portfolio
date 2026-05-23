@@ -1,15 +1,18 @@
 import { useEffect, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import gsap from 'gsap'
+import { Bot, Layers, Rocket, Globe } from 'lucide-react'
+import { profile } from '../data/profile'
 import SectionHeading from '../components/ui/SectionHeading'
 
 const stats = [
-  { value: 8, suffix: '+', label: 'Years experience' },
-  { value: 42, suffix: '', label: 'Projects delivered' },
-  { value: 12, suffix: '', label: 'Awards won' },
+  { value: 50, suffix: '+', label: 'Projects shipped', icon: Rocket, color: '#7c5cff' },
+  { value: 15, suffix: '+', label: 'AI agents deployed', icon: Bot, color: '#22d3ee' },
+  { value: 6, suffix: '+', label: 'Years experience', icon: Layers, color: '#f472b6' },
+  { value: 12, suffix: '', label: 'Countries served', icon: Globe, color: '#34d399' },
 ]
 
-function AnimatedStat({ value, suffix, label }) {
+function AnimatedStat({ value, suffix, label, icon: Icon, color }) {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true })
   const numRef = useRef(null)
@@ -28,12 +31,17 @@ function AnimatedStat({ value, suffix, label }) {
   }, [inView, value, suffix])
 
   return (
-    <div ref={ref} className="text-center md:text-left">
-      <p className="font-display text-4xl md:text-5xl font-medium tracking-tight">
+    <motion.div
+      ref={ref}
+      whileHover={{ scale: 1.05, y: -6 }}
+      className="glass-colored rounded-2xl p-6 text-center"
+    >
+      <Icon className="w-6 h-6 mx-auto mb-3" style={{ color }} />
+      <p className="font-display text-3xl md:text-4xl font-bold">
         <span ref={numRef}>0{suffix}</span>
       </p>
-      <p className="mt-2 text-sm text-silver">{label}</p>
-    </div>
+      <p className="mt-2 text-xs text-silver uppercase tracking-wider">{label}</p>
+    </motion.div>
   )
 }
 
@@ -42,34 +50,35 @@ export default function About() {
     <section id="about" className="section-padding relative">
       <div className="max-w-7xl mx-auto">
         <SectionHeading
-          label="About"
-          title="Where engineering meets editorial design"
-          description="I build immersive digital products that feel as considered as physical luxury goods — calm, precise, and unforgettable."
+          label="About Me"
+          title={`Hi, I'm ${profile.shortName}`}
+          description={profile.bio}
         />
 
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
+            initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.9 }}
             className="relative"
           >
-            <div className="glass rounded-3xl p-2 overflow-hidden">
+            <div className="absolute -inset-4 bg-gradient-to-br from-violet/30 via-cyan/20 to-pink/20 rounded-3xl blur-2xl animate-pulse" />
+            <div className="relative glass rounded-3xl p-2 glow-violet">
               <img
                 src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
-                alt="Alex Mercer"
+                alt={profile.name}
                 className="w-full aspect-[4/5] object-cover rounded-2xl"
                 loading="lazy"
               />
             </div>
             <motion.div
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-              className="absolute -bottom-6 -right-4 md:-right-8 glass rounded-2xl px-6 py-4 max-w-[200px]"
+              animate={{ y: [0, -12, 0], rotate: [0, 2, 0] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="absolute -bottom-4 -right-4 glass-colored rounded-2xl px-6 py-4 max-w-[220px]"
             >
-              <p className="text-xs text-silver uppercase tracking-widest mb-1">Focus</p>
-              <p className="text-sm font-medium">3D · Product · Full-stack</p>
+              <p className="text-xs text-cyan uppercase tracking-widest mb-1">Currently</p>
+              <p className="text-sm font-semibold">Building AI agents & 3D web apps</p>
             </motion.div>
           </motion.div>
 
@@ -78,24 +87,28 @@ export default function About() {
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-lg leading-relaxed text-silver mb-8"
+              className="text-lg leading-relaxed text-silver-light mb-6"
             >
-              With a background spanning creative studios and tech startups, I
-              specialize in translating ambitious visions into polished,
-              performant experiences. Every pixel and polygon is intentional.
-            </motion.p>
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-lg leading-relaxed text-silver mb-12"
-            >
-              From WebGL hero scenes to enterprise SaaS platforms, I partner with
-              teams who value craft, clarity, and calm sophistication.
+              {profile.extendedBio}
             </motion.p>
 
-            <div className="grid grid-cols-3 gap-8 pt-8 border-t border-silver/10">
+            <div className="grid grid-cols-2 gap-3 mb-10">
+              {profile.highlights.map((h, i) => (
+                <motion.div
+                  key={h}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex items-center gap-2 text-sm glass rounded-xl px-4 py-3"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-violet to-cyan shrink-0" />
+                  {h}
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
               {stats.map((stat) => (
                 <AnimatedStat key={stat.label} {...stat} />
               ))}

@@ -1,24 +1,26 @@
-import { Suspense } from 'react'
+import { Suspense, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Float, MeshTransmissionMaterial } from '@react-three/drei'
-import { useRef } from 'react'
+import { Float, MeshTransmissionMaterial, Sparkles } from '@react-three/drei'
 
-function MiniOrb() {
+function Orb() {
   const ref = useRef()
   useFrame((state) => {
-    if (ref.current) ref.current.rotation.y = state.clock.elapsedTime * 0.1
+    if (ref.current) {
+      ref.current.rotation.y = state.clock.elapsedTime * 0.15
+      ref.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.5) * 0.2
+    }
   })
 
   return (
-    <Float speed={1} floatIntensity={0.5}>
-      <mesh ref={ref} scale={0.6}>
+    <Float speed={1.5} floatIntensity={0.8}>
+      <mesh ref={ref} scale={0.8}>
         <sphereGeometry args={[1, 32, 32]} />
         <MeshTransmissionMaterial
           transmission={0.95}
-          thickness={0.3}
-          roughness={0.05}
-          color="#e8e6e3"
-          chromaticAberration={0.03}
+          thickness={0.4}
+          roughness={0.02}
+          color="#7c5cff"
+          chromaticAberration={0.06}
         />
       </mesh>
     </Float>
@@ -27,12 +29,14 @@ function MiniOrb() {
 
 export default function ContactAmbient() {
   return (
-    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-64 h-64 opacity-40 pointer-events-none hidden lg:block">
+    <div className="absolute right-0 top-1/3 w-72 h-72 opacity-50 pointer-events-none hidden lg:block">
       <Canvas camera={{ position: [0, 0, 3], fov: 45 }} gl={{ alpha: true }}>
         <Suspense fallback={null}>
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[2, 3, 2]} intensity={0.6} />
-          <MiniOrb />
+          <ambientLight intensity={0.4} />
+          <pointLight position={[2, 2, 2]} intensity={1} color="#22d3ee" />
+          <pointLight position={[-2, -1, 1]} intensity={0.6} color="#f472b6" />
+          <Orb />
+          <Sparkles count={40} scale={4} size={1.5} color="#c4b5fd" />
         </Suspense>
       </Canvas>
     </div>
