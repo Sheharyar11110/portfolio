@@ -1,118 +1,118 @@
-import { lazy, Suspense } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { Bot, Code2, Sparkles, Server } from 'lucide-react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ArrowDownRight } from 'lucide-react'
 import { profile } from '../data/profile'
+import TextReveal from '../components/ui/TextReveal'
 import MagneticButton from '../components/ui/MagneticButton'
 import ScrollIndicator from '../components/ui/ScrollIndicator'
+import Reveal from '../components/ui/Reveal'
 
-const HeroScene = lazy(() => import('../three/HeroScene'))
+gsap.registerPlugin(ScrollTrigger)
 
-const tags = [
-  { icon: Code2, label: 'Full Stack' },
-  { icon: Server, label: 'FastAPI · Kafka' },
-  { icon: Bot, label: 'AI Agents' },
-  { icon: Sparkles, label: '3D Web' },
-]
+const tags = ['Full Stack', 'FastAPI · Kafka', 'AI Agents', 'React']
 
-export default function Hero({ mouse }) {
+export default function Hero() {
+  const sectionRef = useRef(null)
+  const contentRef = useRef(null)
+
+  useEffect(() => {
+    const section = sectionRef.current
+    const content = contentRef.current
+    if (!section || !content) return
+
+    const parallax = gsap.to(content, {
+      y: 120,
+      opacity: 0.3,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: section,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1,
+      },
+    })
+
+    return () => parallax.scrollTrigger?.kill()
+  }, [])
+
   return (
-    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden">
-      <Suspense fallback={<div className="absolute inset-0 mesh-bg" />}>
-        <HeroScene mouse={mouse} />
-      </Suspense>
+    <section
+      ref={sectionRef}
+      id="hero"
+      className="relative min-h-screen flex items-end overflow-hidden border-b border-border"
+    >
+      <div className="absolute inset-0 grid-bg opacity-50 pointer-events-none" aria-hidden />
+      <div className="absolute inset-0 hero-glow pointer-events-none" aria-hidden />
 
-      <div className="absolute inset-0 mesh-bg pointer-events-none opacity-60" />
-
-      <div className="relative z-10 section-padding w-full max-w-7xl mx-auto pt-28 md:pt-32">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="max-w-5xl"
-        >
+      <div ref={contentRef} className="relative w-full section-padding pt-32 md:pt-44 pb-20">
+        <div className="max-w-7xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 glass-colored rounded-full px-4 py-2 mb-8"
+            initial={{ opacity: 0, x: -24 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="flex items-center gap-4 mb-10"
           >
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-fg opacity-30" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-fg" />
             </span>
-            <span className="text-xs font-display tracking-widest uppercase text-silver-light">
-              {profile.location}
+            <span className="text-xs tracking-label uppercase text-fg-muted font-medium">
+              {profile.location} · Available for work
             </span>
           </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
-            className="font-body text-sm md:text-base tracking-label uppercase text-cyan mb-4 font-medium"
-          >
+          <p className="text-xs md:text-sm tracking-label uppercase text-fg-subtle mb-4 font-medium">
             {profile.title}
-          </motion.p>
+          </p>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-semibold tracking-display leading-[0.92]"
-          >
-            <span className="text-gradient">{profile.name}</span>
-          </motion.h1>
+          <TextReveal
+            as="h1"
+            text={profile.name}
+            className="font-display text-[clamp(3.2rem,11vw,7.5rem)] font-bold tracking-display leading-[0.88] max-w-5xl"
+            delay={0.35}
+          />
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7 }}
-            className="mt-6 text-xl md:text-2xl lg:text-3xl text-silver-light font-light max-w-3xl leading-snug"
-          >
-            {profile.tagline}
-          </motion.p>
+          <Reveal delay={0.5} className="mt-10 md:mt-14 grid lg:grid-cols-[1fr_auto] gap-10 items-end max-w-5xl">
+            <p className="text-lg md:text-2xl text-fg-muted leading-relaxed max-w-xl font-light">
+              {profile.tagline}
+            </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.85 }}
-            className="flex flex-wrap gap-3 mt-8"
-          >
-            {tags.map((tag, i) => (
-              <motion.span
-                key={tag.label}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.9 + i * 0.1 }}
-                whileHover={{ scale: 1.05, y: -4 }}
-                className="glass flex items-center gap-2 px-4 py-2 rounded-full text-sm"
+            <div className="flex flex-col sm:flex-row gap-3">
+              <MagneticButton href="#projects" className="btn-primary">
+                View work
+                <ArrowDownRight size={16} />
+              </MagneticButton>
+              <MagneticButton href="#contact" className="btn-outline">
+                Get in touch
+              </MagneticButton>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.65} className="mt-14 flex flex-wrap gap-3">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className="glass-card text-xs px-4 py-2 text-fg-muted tracking-wide"
               >
-                <tag.icon size={16} className="text-violet" />
-                {tag.label}
-              </motion.span>
+                {tag}
+              </span>
             ))}
-          </motion.div>
+          </Reveal>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
-            className="mt-12 flex flex-wrap gap-4"
-          >
-            <MagneticButton
-              href="#agents"
-              className="text-sm font-semibold bg-gradient-to-r from-violet to-cyan text-white px-8 py-4 rounded-full glow-violet"
-            >
-              Explore AI Agents
-            </MagneticButton>
-            <MagneticButton
-              href="#projects"
-              className="text-sm font-medium glass px-8 py-4 rounded-full border border-white/20 hover:border-violet/50 transition-colors"
-            >
-              View Projects
-            </MagneticButton>
-          </motion.div>
-        </motion.div>
+          <Reveal delay={0.75} className="mt-16 pt-8 border-t border-border grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { label: 'Role', value: profile.title },
+              ...profile.backendStack.slice(0, 3).map((tech) => ({ label: 'Stack', value: tech })),
+            ].map(({ label, value }) => (
+              <div key={value}>
+                <p className="text-[10px] tracking-label uppercase text-fg-subtle mb-1.5">{label}</p>
+                <p className="text-sm font-medium">{value}</p>
+              </div>
+            ))}
+          </Reveal>
+        </div>
       </div>
 
       <ScrollIndicator />

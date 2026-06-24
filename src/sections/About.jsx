@@ -1,119 +1,106 @@
 import { useEffect, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
 import gsap from 'gsap'
-import { Bot, Layers, Rocket, Globe } from 'lucide-react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { profile } from '../data/profile'
 import SectionHeading from '../components/ui/SectionHeading'
-import profilePhoto from '../assets/profile.jpg'
+import AnimatedCounter from '../components/ui/AnimatedCounter'
+import Reveal, { Stagger, StaggerItem } from '../components/ui/Reveal'
+import profile_img from '../assets/profile.jpg'
+gsap.registerPlugin(ScrollTrigger)
 
 const stats = [
-  { value: 50, suffix: '+', label: 'Projects shipped', icon: Rocket, color: '#7c5cff' },
-  { value: 15, suffix: '+', label: 'AI agents deployed', icon: Bot, color: '#22d3ee' },
-  { value: 6, suffix: '+', label: 'Years experience', icon: Layers, color: '#f472b6' },
-  { value: 12, suffix: '', label: 'Countries served', icon: Globe, color: '#34d399' },
+  { value: 50, suffix: '+', label: 'Projects shipped' },
+  { value: 15, suffix: '+', label: 'AI agents deployed' },
+  { value: 6, suffix: '+', label: 'Years experience' },
+  { value: 12, suffix: '', label: 'Countries served' },
 ]
 
-function AnimatedStat({ value, suffix, label, icon: Icon, color }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true })
-  const numRef = useRef(null)
-
-  useEffect(() => {
-    if (!inView || !numRef.current) return
-    const obj = { val: 0 }
-    gsap.to(obj, {
-      val: value,
-      duration: 2,
-      ease: 'power3.out',
-      onUpdate: () => {
-        numRef.current.textContent = Math.round(obj.val) + suffix
-      },
-    })
-  }, [inView, value, suffix])
-
-  return (
-    <motion.div
-      ref={ref}
-      whileHover={{ scale: 1.05, y: -6 }}
-      className="glass-colored rounded-2xl p-6 text-center"
-    >
-      <Icon className="w-6 h-6 mx-auto mb-3" style={{ color }} />
-      <p className="font-display text-3xl md:text-4xl font-bold">
-        <span ref={numRef}>0{suffix}</span>
-      </p>
-      <p className="mt-2 text-xs text-silver uppercase tracking-wider">{label}</p>
-    </motion.div>
-  )
-}
+const profilePhoto = profile_img
 
 export default function About() {
+  const imageRef = useRef(null)
+
+  useEffect(() => {
+    const img = imageRef.current
+    if (!img) return
+
+    const tween = gsap.fromTo(
+      img,
+      { y: 40, scale: 1.08 },
+      {
+        y: -40,
+        scale: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: img,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.5,
+        },
+      },
+    )
+
+    return () => tween.scrollTrigger?.kill()
+  }, [])
+
   return (
-    <section id="about" className="section-padding relative">
+    <section id="about" className="section-padding border-b border-border relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <SectionHeading
-          label="About Me"
+          index="01"
+          label="About"
           title={`Hi, I'm ${profile.shortName}`}
           description={profile.bio}
         />
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9 }}
-            className="relative"
-          >
-            <div className="absolute -inset-4 bg-gradient-to-br from-violet/30 via-cyan/20 to-pink/20 rounded-3xl blur-2xl animate-pulse" />
-            <div className="relative glass rounded-3xl p-2 glow-violet">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <Reveal direction="left" className="relative">
+            <div className="aspect-[4/5] overflow-hidden border border-border card-shine">
               <img
+                ref={imageRef}
                 src={profilePhoto}
                 alt={profile.name}
-                className="w-full aspect-[4/5] object-cover object-top rounded-2xl"
+                className="w-full h-full object-cover object-top "
                 loading="lazy"
+                decoding="async"
               />
             </div>
-            <motion.div
-              animate={{ y: [0, -12, 0], rotate: [0, 2, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="absolute -bottom-4 -right-4 glass-colored rounded-2xl px-6 py-4 max-w-[220px]"
-            >
-              <p className="text-xs text-cyan uppercase tracking-widest mb-1">Currently</p>
-              <p className="text-sm font-semibold">Building AI agents & 3D web apps</p>
-            </motion.div>
-          </motion.div>
+            <Reveal delay={0.2} className="absolute -bottom-4 -right-4 md:right-4 glass-card px-5 py-4 max-w-[240px]">
+              <p className="text-[10px] tracking-label uppercase text-fg-subtle mb-1">Currently</p>
+              <p className="text-sm font-medium">Building AI agents & full-stack platforms</p>
+            </Reveal>
+          </Reveal>
 
           <div>
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-lg leading-relaxed text-silver-light mb-6"
-            >
-              {profile.extendedBio}
-            </motion.p>
+            <Reveal delay={0.1}>
+              <p className="text-base md:text-lg leading-relaxed text-fg-muted mb-8">
+                {profile.extendedBio}
+              </p>
+            </Reveal>
 
-            <div className="grid grid-cols-2 gap-3 mb-10">
-              {profile.highlights.map((h, i) => (
-                <motion.div
-                  key={h}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="flex items-center gap-2 text-sm glass rounded-xl px-4 py-3"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-violet to-cyan shrink-0" />
-                  {h}
-                </motion.div>
+            <Stagger className="grid grid-cols-2 gap-3 mb-10" stagger={0.06}>
+              {profile.highlights.map((h) => (
+                <StaggerItem key={h}>
+                  <div className="flex items-center gap-3 text-sm glass-card px-4 py-3 surface-hover h-full">
+                    <span className="w-1 h-1 bg-fg shrink-0" />
+                    {h}
+                  </div>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
 
-            <div className="grid grid-cols-2 gap-4">
+            <Stagger className="grid grid-cols-2 gap-px bg-border" stagger={0.1}>
               {stats.map((stat) => (
-                <AnimatedStat key={stat.label} {...stat} />
+                <StaggerItem key={stat.label}>
+                  <div className="bg-bg p-6 md:p-8 group hover:bg-bg-elevated transition-colors">
+                    <p className="font-display text-3xl md:text-4xl font-bold tracking-display">
+                      <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                    </p>
+                    <p className="mt-2 text-xs text-fg-muted uppercase tracking-wider">{stat.label}</p>
+                  </div>
+                </StaggerItem>
               ))}
-            </div>
+            </Stagger>
           </div>
         </div>
       </div>

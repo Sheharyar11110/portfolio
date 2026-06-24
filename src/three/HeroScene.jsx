@@ -11,6 +11,7 @@ import {
 import * as THREE from 'three'
 import { useMediaQuery } from '../hooks/useMediaQuery'
 
+const SCALE = 1.6
 const COLORS = ['#7c5cff', '#22d3ee', '#f472b6', '#34d399', '#fb923c', '#a78bfa']
 
 function Bubble({ position, scale = 1, color = '#7c5cff', speed = 1 }) {
@@ -55,7 +56,7 @@ function WireRing({ position, color }) {
   })
   return (
     <mesh ref={ref} position={position} rotation={[Math.PI / 2, 0, 0]}>
-      <torusGeometry args={[1.2, 0.02, 64, 8]} />
+      <torusGeometry args={[1.2 * SCALE, 0.02, 64, 8]} />
       <meshBasicMaterial color={color} transparent opacity={0.5} wireframe />
     </mesh>
   )
@@ -71,7 +72,7 @@ function CoreOrb() {
   })
   return (
     <mesh ref={ref}>
-      <icosahedronGeometry args={[0.9, 2]} />
+      <icosahedronGeometry args={[0.9 * SCALE, 2]} />
       <meshStandardMaterial
         color="#7c5cff"
         emissive="#7c5cff"
@@ -99,7 +100,7 @@ function SceneContent({ mouse }) {
         [0.8, -1.8, 0.2],
       ].map((pos, i) => ({
         pos,
-        scale: 0.35 + (i % 3) * 0.2,
+        scale: (0.35 + (i % 3) * 0.2) * SCALE,
         color: COLORS[i % COLORS.length],
         speed: 0.8 + (i % 4) * 0.2,
       })),
@@ -128,8 +129,8 @@ function SceneContent({ mouse }) {
       ))}
       <WireRing position={[0, 0, 0]} color="#22d3ee" />
       <WireRing position={[0, 0, 0.1]} color="#f472b6" />
-      <Sparkles count={150} scale={10} size={2} speed={0.4} opacity={0.6} color="#c4b5fd" />
-      <Stars radius={50} depth={30} count={2000} factor={2} saturation={0} fade speed={0.5} />
+      <Sparkles count={250} scale={16} size={3} speed={0.6} opacity={0.7} color="#c4b5fd" />
+      <Stars radius={80} depth={40} count={3000} factor={3} saturation={0} fade speed={0.8} />
       <ContactShadows position={[0, -2.5, 0]} opacity={0.5} scale={14} blur={3} far={5} />
     </group>
   )
@@ -159,7 +160,7 @@ export default function HeroScene({ mouse }) {
   return (
     <div className="absolute inset-0">
       <Canvas
-        camera={{ position: [0, 0, 7], fov: 45 }}
+        camera={{ position: [0, 0, 9], fov: 50 }}
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       >

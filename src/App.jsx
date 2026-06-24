@@ -1,79 +1,65 @@
-import { lazy, Suspense, useEffect, useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import { ThemeProvider } from './context/ThemeContext'
 import { useLenis } from './hooks/useLenis'
-import { useMouse } from './hooks/useMouse'
-import FloatingBubbles from './components/effects/FloatingBubbles'
-import Marquee from './components/effects/Marquee'
-import LoadingScreen from './components/layout/LoadingScreen'
-import Navbar from './components/layout/Navbar'
+import Particles from './components/effects/Particles'
 import Cursor from './components/layout/Cursor'
+import ScrollProgress from './components/ui/ScrollProgress'
+import Navbar from './components/layout/Navbar'
 import CommandPalette from './components/layout/CommandPalette'
 import Dock from './components/layout/Dock'
 import Footer from './components/layout/Footer'
-import AmbientAudio from './components/layout/AmbientAudio'
+import Marquee from './components/effects/Marquee'
 import Hero from './sections/Hero'
-import About from './sections/About'
-import AIAgents from './sections/AIAgents'
-import HorizontalShowcase from './sections/HorizontalShowcase'
-import Skills from './sections/Skills'
-import Projects from './sections/Projects'
-import Experience from './sections/Experience'
-import Testimonials from './sections/Testimonials'
-import Contact from './sections/Contact'
 
-const Assistant = lazy(() => import('./components/layout/Assistant'))
+const About = lazy(() => import('./sections/About'))
+const AIAgents = lazy(() => import('./sections/AIAgents'))
+const HorizontalShowcase = lazy(() => import('./sections/HorizontalShowcase'))
+const Skills = lazy(() => import('./sections/Skills'))
+const Projects = lazy(() => import('./sections/Projects'))
+const Experience = lazy(() => import('./sections/Experience'))
+const Testimonials = lazy(() => import('./sections/Testimonials'))
+const Contact = lazy(() => import('./sections/Contact'))
 
 const marqueeItems = [
-  'Sheharyar Liaqat',
+  'Full Stack Developer',
   'Python · FastAPI',
   'Docker · Redis · Kafka',
   'PostgreSQL',
   'AI Agents',
-  'React · Three.js',
-  'Full Stack Developer',
-  'OpenAI · LangChain',
+  'React',
+  'Sheharyar Liaqat',
 ]
 
 function AppContent() {
-  const [loading, setLoading] = useState(true)
   const [commandOpen, setCommandOpen] = useState(false)
-  const mouse = useMouse()
-
   useLenis()
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2400)
-    return () => clearTimeout(timer)
-  }, [])
 
   return (
     <>
-      <FloatingBubbles />
-      <LoadingScreen isLoading={loading} />
-      <AmbientAudio />
-      <Cursor mouse={mouse} />
+      <Particles />
+      <div className="fixed inset-0 noise-overlay z-[2] pointer-events-none" aria-hidden />
+      <Cursor />
+      <ScrollProgress />
       <Navbar onOpenCommand={() => setCommandOpen(true)} />
       <CommandPalette open={commandOpen} onClose={setCommandOpen} />
       <Dock />
 
       <main className="relative z-10">
-        <Hero mouse={mouse} />
+        <Hero />
         <Marquee items={marqueeItems} />
-        <About />
-        <AIAgents />
-        <HorizontalShowcase />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Testimonials />
-        <Contact />
+        <Suspense fallback={null}>
+          <About />
+          <AIAgents />
+          <HorizontalShowcase />
+          <Skills />
+          <Projects />
+          <Experience />
+          <Testimonials />
+          <Contact />
+        </Suspense>
       </main>
 
       <Footer />
-
-      <Suspense fallback={null}>
-        <Assistant />
-      </Suspense>
     </>
   )
 }

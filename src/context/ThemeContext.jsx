@@ -4,10 +4,9 @@ const ThemeContext = createContext(null)
 
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
-    if (typeof window === 'undefined') return 'light'
-    return localStorage.getItem('theme') || 'light'
+    if (typeof window === 'undefined') return 'dark'
+    return localStorage.getItem('theme') || 'dark'
   })
-  const [ambient, setAmbient] = useState(false)
 
   useEffect(() => {
     const root = document.documentElement
@@ -16,12 +15,9 @@ export function ThemeProvider({ children }) {
   }, [theme])
 
   const toggleTheme = () => setTheme((t) => (t === 'light' ? 'dark' : 'light'))
-  const toggleAmbient = () => setAmbient((a) => !a)
 
   return (
-    <ThemeContext.Provider
-      value={{ theme, toggleTheme, ambient, toggleAmbient, setAmbient }}
-    >
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   )

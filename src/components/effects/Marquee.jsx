@@ -1,25 +1,19 @@
-import { motion } from 'framer-motion'
-
-export default function Marquee({ items, speed = 25 }) {
+export default function Marquee({ items }) {
   const doubled = [...items, ...items]
 
   return (
-    <div className="overflow-hidden py-6 border-y border-white/10">
-      <motion.div
-        className="flex gap-12 whitespace-nowrap"
-        animate={{ x: ['0%', '-50%'] }}
-        transition={{ duration: speed, repeat: Infinity, ease: 'linear' }}
-      >
+    <div className="overflow-hidden py-5 border-b border-border bg-bg-secondary">
+      <div className="marquee-track flex w-max gap-16 whitespace-nowrap">
         {doubled.map((item, i) => (
           <span
             key={i}
-            className="font-display text-4xl md:text-6xl font-semibold tracking-display text-white/10 flex items-center gap-12 shrink-0"
+            className="font-display text-sm md:text-base font-semibold tracking-display uppercase text-fg-subtle flex items-center gap-16 shrink-0"
           >
             {item}
-            <span className="w-2 h-2 rounded-full bg-accent shrink-0" />
+            <span className="w-1.5 h-1.5 bg-fg/30 shrink-0 rotate-45" />
           </span>
         ))}
-      </motion.div>
+      </div>
     </div>
   )
 }

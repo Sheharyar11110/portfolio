@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Bot, Zap, Shield, GitBranch } from 'lucide-react'
 import { aiAgents } from '../data/agents'
 import SectionHeading from '../components/ui/SectionHeading'
+import { Stagger, StaggerItem } from '../components/ui/Reveal'
 
 const features = [
   { icon: Bot, title: 'Multi-Agent', desc: 'Orchestrated workflows with memory & tools' },
@@ -12,90 +13,72 @@ const features = [
 
 export default function AIAgents() {
   return (
-    <section id="agents" className="section-padding relative overflow-hidden">
-      <div className="absolute inset-0 gradient-ambient pointer-events-none" />
-      <div className="max-w-7xl mx-auto relative">
+    <section id="agents" className="section-padding border-b border-border bg-bg-secondary relative overflow-hidden">
+      <div className="max-w-7xl mx-auto">
         <SectionHeading
+          index="02"
           label="AI Systems"
           title="Intelligent agents that work for you"
-          description="AI agents powered by FastAPI, Redis, Kafka, and PostgreSQL — production-ready orchestration with Docker deployments."
+          description="Production-ready orchestration with FastAPI, Redis, Kafka, and PostgreSQL — deployed with Docker."
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-          {features.map((f, i) => (
-            <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="glass-colored rounded-2xl p-6 text-center"
-            >
-              <f.icon className="w-8 h-8 mx-auto text-cyan mb-4" />
-              <h3 className="font-display font-semibold">{f.title}</h3>
-              <p className="text-sm text-silver mt-2">{f.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {aiAgents.map((agent, i) => (
-            <motion.div
-              key={agent.id}
-              initial={{ opacity: 0, scale: 0.9, rotateX: 15 }}
-              whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.6 }}
-              whileHover={{ y: -12, rotateY: 5 }}
-              className="rounded-3xl relative overflow-hidden group min-h-[320px] flex flex-col"
-              style={{ transformStyle: 'preserve-3d' }}
-            >
-              {agent.image && (
-                <>
-                  <img
-                    src={agent.image}
-                    alt={agent.name}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: `linear-gradient(to top, rgba(12,10,20,0.95) 0%, rgba(12,10,20,0.7) 55%, ${agent.color}33 100%)`,
-                    }}
-                  />
-                </>
-              )}
-              <div className="relative z-10 p-8 flex flex-col flex-1 justify-end">
-                <span className="text-4xl">{agent.icon}</span>
-                <h3 className="font-display text-xl font-semibold mt-4">{agent.name}</h3>
-                <p className="text-xs uppercase tracking-widest mt-1" style={{ color: agent.color }}>
-                  {agent.role}
-                </p>
-                <p className="text-silver text-sm mt-4 leading-relaxed">{agent.description}</p>
-                <div className="flex flex-wrap gap-2 mt-6">
-                  {agent.stack.map((s) => (
-                    <span
-                      key={s}
-                      className="text-[10px] px-2.5 py-1 rounded-full border border-white/20 bg-black/30"
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
+        <Stagger className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border mb-16" stagger={0.08}>
+          {features.map((f) => (
+            <StaggerItem key={f.title}>
+              <div className="bg-bg p-6 md:p-8 h-full group hover:bg-bg-elevated transition-colors">
+                <f.icon className="w-5 h-5 mb-4 text-fg group-hover:scale-110 transition-transform" strokeWidth={1.5} />
+                <h3 className="font-display font-semibold text-sm">{f.title}</h3>
+                <p className="text-sm text-fg-muted mt-2 leading-relaxed">{f.desc}</p>
               </div>
-              <motion.div
-                className="absolute bottom-0 left-0 h-1 rounded-full z-20"
-                style={{ background: agent.color }}
-                initial={{ width: 0 }}
-                whileInView={{ width: '100%' }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 + i * 0.1, duration: 0.8 }}
-              />
-            </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
+
+        <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" stagger={0.1}>
+          {aiAgents.map((agent, i) => (
+            <StaggerItem key={agent.id}>
+              <motion.article
+                whileHover={{ y: -8 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                className="group relative overflow-hidden border border-border bg-bg card-shine h-full"
+              >
+                {agent.image && (
+                  <div className="aspect-[16/10] overflow-hidden border-b border-border">
+                    <img
+                      src={agent.image}
+                      alt={agent.name}
+                      className="w-full h-full object-cover group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                )}
+                <div className="p-6 md:p-8">
+                  <p className="text-xs tracking-label uppercase text-fg-subtle">{agent.role}</p>
+                  <h3 className="font-display text-xl font-semibold mt-2">{agent.name}</h3>
+                  <p className="text-fg-muted text-sm mt-3 leading-relaxed">{agent.description}</p>
+                  <div className="flex flex-wrap gap-2 mt-5">
+                    {agent.stack.map((s) => (
+                      <span
+                        key={s}
+                        className="text-[10px] uppercase tracking-wider px-2.5 py-1 border border-border text-fg-muted"
+                      >
+                        {s}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <motion.div
+                  className="absolute bottom-0 left-0 h-px bg-fg"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: '100%' }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 + i * 0.08, duration: 0.8 }}
+                />
+              </motion.article>
+            </StaggerItem>
+          ))}
+        </Stagger>
       </div>
     </section>
   )

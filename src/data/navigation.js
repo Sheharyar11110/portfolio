@@ -16,5 +16,4 @@ export const commandItems = [
   { id: 'experience', label: 'Experience', href: '#experience', shortcut: 'E' },
   { id: 'contact', label: 'Contact', href: '#contact', shortcut: 'C' },
   { id: 'theme', label: 'Toggle Theme', action: 'theme', shortcut: 'T' },
-  { id: 'ambient', label: 'Toggle Ambience', action: 'ambient', shortcut: 'M' },
 ]
