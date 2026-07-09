@@ -9,10 +9,10 @@ import profile_img from '../assets/profile.jpg'
 gsap.registerPlugin(ScrollTrigger)
 
 const stats = [
-  { value: 50, suffix: '+', label: 'Projects shipped' },
-  { value: 15, suffix: '+', label: 'AI agents deployed' },
-  { value: 6, suffix: '+', label: 'Years experience' },
-  { value: 12, suffix: '', label: 'Countries served' },
+  { value: 3, suffix: '+', label: 'Major projects' },
+  { value: 2, suffix: '+', label: 'Years experience' },
+  { value: 2, suffix: '', label: 'Internships' },
+  { display: '3.54', label: 'CGPA' },
 ]
 
 const profilePhoto = profile_img
@@ -67,7 +67,7 @@ export default function About() {
             </div>
             <Reveal delay={0.2} className="absolute -bottom-4 -right-4 md:right-4 glass-card px-5 py-4 max-w-[240px]">
               <p className="text-[10px] tracking-label uppercase text-fg-subtle mb-1">Currently</p>
-              <p className="text-sm font-medium">Building AI agents & full-stack platforms</p>
+              <p className="text-sm font-medium">Full Stack Developer at Devstrix</p>
             </Reveal>
           </Reveal>
 
@@ -94,7 +94,11 @@ export default function About() {
                 <StaggerItem key={stat.label}>
                   <div className="bg-bg p-6 md:p-8 group hover:bg-bg-elevated transition-colors">
                     <p className="font-display text-3xl md:text-4xl font-bold tracking-display">
-                      <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                      {stat.display ? (
+                        stat.display
+                      ) : (
+                        <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                      )}
                     </p>
                     <p className="mt-2 text-xs text-fg-muted uppercase tracking-wider">{stat.label}</p>
                   </div>

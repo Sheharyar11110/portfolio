@@ -4,6 +4,7 @@ export const navLinks = [
   { label: 'Skills', href: '#skills' },
   { label: 'Work', href: '#projects' },
   { label: 'Experience', href: '#experience' },
+  { label: 'Education', href: '#education' },
   { label: 'Contact', href: '#contact' },
 ]
 
@@ -14,6 +15,8 @@ export const commandItems = [
   { id: 'skills', label: 'Skills', href: '#skills', shortcut: 'S' },
   { id: 'projects', label: 'Projects', href: '#projects', shortcut: 'P' },
   { id: 'experience', label: 'Experience', href: '#experience', shortcut: 'E' },
+  { id: 'education', label: 'Education', href: '#education', shortcut: 'D' },
+  { id: 'cv', label: 'Download CV', href: '/SheharyarCV.pdf', shortcut: 'R' },
   { id: 'contact', label: 'Contact', href: '#contact', shortcut: 'C' },
   { id: 'theme', label: 'Toggle Theme', action: 'theme', shortcut: 'T' },
 ]

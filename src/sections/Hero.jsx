@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ArrowDownRight } from 'lucide-react'
+import { ArrowDownRight, FileDown } from 'lucide-react'
 import { profile } from '../data/profile'
 import TextReveal from '../components/ui/TextReveal'
 import MagneticButton from '../components/ui/MagneticButton'
@@ -11,7 +11,7 @@ import Reveal from '../components/ui/Reveal'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const tags = ['Full Stack', 'FastAPI · Kafka', 'AI Agents', 'React']
+const tags = ['Full Stack', 'FastAPI · React', 'Docker · AWS', 'AI / ML']
 
 export default function Hero() {
   const sectionRef = useRef(null)
@@ -83,6 +83,10 @@ export default function Hero() {
               <MagneticButton href="#projects" className="btn-primary">
                 View work
                 <ArrowDownRight size={16} />
+              </MagneticButton>
+              <MagneticButton href={profile.cv} className="btn-outline" download="SheharyarCV.pdf">
+                Download CV
+                <FileDown size={16} />
               </MagneticButton>
               <MagneticButton href="#contact" className="btn-outline">
                 Get in touch

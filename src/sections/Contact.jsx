@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Send, Mail, MapPin, Code2, Network } from 'lucide-react'
+import { Send, Mail, MapPin, Code2, Network, Phone, FileDown } from 'lucide-react'
 import { profile } from '../data/profile'
 import SectionHeading from '../components/ui/SectionHeading'
 import MagneticButton from '../components/ui/MagneticButton'
@@ -18,7 +18,9 @@ export default function Contact() {
 
   const links = [
     { icon: Mail, text: profile.email, href: `mailto:${profile.email}` },
+    { icon: Phone, text: profile.phone, href: `tel:${profile.phone.replace(/\s/g, '')}` },
     { icon: MapPin, text: profile.location, href: null },
+    { icon: FileDown, text: 'Download CV', href: profile.cv, download: 'SheharyarCV.pdf' },
     { icon: Code2, text: 'GitHub', href: profile.github },
     { icon: Network, text: 'LinkedIn', href: profile.linkedin },
   ]
@@ -32,10 +34,10 @@ export default function Contact() {
               index="07"
               label="Contact"
               title="Let's build something together"
-              description="Open for full-stack contracts, AI agent projects, and long-term collaborations."
+              description="Open for full-stack roles, backend contracts, and AI-powered product development."
             />
             <Stagger className="space-y-3 mt-4" stagger={0.08}>
-              {links.map(({ icon: Icon, text, href }) => (
+              {links.map(({ icon: Icon, text, href, download }) => (
                 <StaggerItem key={text}>
                   <motion.div
                     whileHover={{ x: 8 }}
@@ -43,7 +45,13 @@ export default function Contact() {
                   >
                     <Icon size={16} className="text-fg-muted shrink-0" strokeWidth={1.5} />
                     {href ? (
-                      <a href={href} className="text-sm text-fg-muted hover:text-fg transition-colors">
+                      <a
+                        href={href}
+                        download={download}
+                        target={download ? undefined : '_blank'}
+                        rel={download ? undefined : 'noopener noreferrer'}
+                        className="text-sm text-fg-muted hover:text-fg transition-colors"
+                      >
                         {text}
                       </a>
                     ) : (

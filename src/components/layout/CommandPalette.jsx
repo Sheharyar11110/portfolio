@@ -26,7 +26,11 @@ export default function CommandPalette({ open, onClose }) {
   const handleSelect = (item) => {
     if (item.action === 'theme') toggleTheme()
     else if (item.href) {
-      document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' })
+      if (item.href.startsWith('#')) {
+        document.querySelector(item.href)?.scrollIntoView({ behavior: 'smooth' })
+      } else {
+        window.open(item.href, item.href.endsWith('.pdf') ? '_self' : '_blank')
+      }
     }
     onClose(false)
     setQuery('')

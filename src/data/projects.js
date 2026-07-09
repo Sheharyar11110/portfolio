@@ -1,62 +1,41 @@
 export const projects = [
   {
-    id: 'agentflow',
-    title: 'AgentFlow OS',
-    subtitle: 'Multi-agent automation platform',
+    id: 'wedx',
+    title: 'WedX',
+    subtitle: 'Event management platform',
     description:
-      'Enterprise platform with FastAPI core, Kafka event bus, Redis caching, and PostgreSQL. Real-time agent orchestration, token analytics, and Docker/K8s deployment.',
-    tags: ['FastAPI', 'Kafka', 'PostgreSQL', 'Docker'],
+      'Built a full-stack event management platform featuring RSVP management, a vendor marketplace, and community features. Developed scalable APIs with Redis caching and Kafka-based event processing for high-throughput workloads, with role-based authentication and AWS cloud deployment.',
+    tags: ['FastAPI', 'React', 'PostgreSQL', 'Redis', 'Kafka', 'Docker', 'AWS'],
+    category: 'platform',
     year: '2025',
-    color: '#7c5cff',
+    color: '#c084fc',
     image:
-      'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
+      'https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80',
   },
   {
-    id: 'streampipe',
-    title: 'StreamPipe',
-    subtitle: 'Event-driven data platform',
+    id: 'healthcare-ai',
+    title: 'AI Healthcare Diagnosis',
+    subtitle: 'Medical image analysis platform',
     description:
-      'High-throughput ingestion pipeline using Kafka consumers, Redis streams, and FastAPI workers. PostgreSQL for analytics with sub-second query dashboards.',
-    tags: ['Python', 'Kafka', 'Redis', 'PostgreSQL'],
+      'Developed an AI-powered web platform for medical image analysis and disease detection. Built REST APIs for image processing, prediction, and automated report generation, integrated deep learning models with TensorFlow/PyTorch, and deployed scalable services using Docker and AWS.',
+    tags: ['Python', 'FastAPI', 'React', 'TensorFlow', 'PyTorch', 'PostgreSQL', 'AWS'],
+    category: 'ai',
     year: '2025',
     color: '#22d3ee',
     image:
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80',
+      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80',
   },
   {
-    id: 'nexus',
-    title: 'Nexus Commerce',
-    subtitle: 'Headless e-commerce suite',
+    id: 'customer-support',
+    title: 'Intelligent Customer Support',
+    subtitle: 'AI-powered support platform',
     description:
-      'Marketplace with FastAPI backend, PostgreSQL inventory, Redis session store, and Flutter mobile app with AI product recommendations.',
-    tags: ['FastAPI', 'PostgreSQL', 'Redis', 'Flutter'],
+      'Developed an AI-powered customer support platform with real-time chat capabilities. Built backend services for conversation management and knowledge retrieval, integrated LLM-based responses and automated support workflows, with analytics dashboards to track interactions and performance.',
+    tags: ['FastAPI', 'React', 'OpenAI', 'LLM APIs', 'PostgreSQL', 'Redis'],
+    category: 'ai',
     year: '2025',
     color: '#34d399',
     image:
-      'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&q=80',
-  },
-  {
-    id: 'immersive',
-    title: 'Immersive Studio',
-    subtitle: '3D product configurator',
-    description:
-      'React Three Fiber storefront with Next.js frontend and FastAPI asset API. Docker-compose for local dev, Redis for session state.',
-    tags: ['Three.js', 'FastAPI', 'Docker', 'Redis'],
-    year: '2024',
-    color: '#f472b6',
-    image:
-      'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80',
-  },
-  {
-    id: 'healthai',
-    title: 'HealthAI Assist',
-    subtitle: 'Clinical workflow agent',
-    description:
-      'HIPAA-aware AI agent on FastAPI with PostgreSQL patient records, Kafka audit logs, and TensorFlow inference workers in Docker containers.',
-    tags: ['FastAPI', 'PostgreSQL', 'Kafka', 'TensorFlow'],
-    year: '2024',
-    color: '#fb923c',
-    image:
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80',
+      'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=1200&q=80',
   },
 ]

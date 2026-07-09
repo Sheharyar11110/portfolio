@@ -10,10 +10,13 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-wrap gap-6 text-sm">
-          <a href={profile.github} className="text-fg-muted hover:text-fg transition-colors">
+          <a href={profile.cv} download="SheharyarCV.pdf" className="text-fg-muted hover:text-fg transition-colors">
+            Download CV
+          </a>
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="text-fg-muted hover:text-fg transition-colors">
             GitHub
           </a>
-          <a href={profile.linkedin} className="text-fg-muted hover:text-fg transition-colors">
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="text-fg-muted hover:text-fg transition-colors">
             LinkedIn
           </a>
           <a href={`mailto:${profile.email}`} className="text-fg-muted hover:text-fg transition-colors">

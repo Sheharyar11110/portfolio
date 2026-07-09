@@ -42,7 +42,7 @@ export default function Skills() {
           index="03"
           label="Tech Stack"
           title="Full stack · Backend · AI"
-          description="Python & FastAPI microservices, Kafka pipelines, Docker deployments — plus React and intelligent agents."
+          description="Python & FastAPI backends, React frontends, AWS & Docker deployments — plus AI/ML with TensorFlow and LLM APIs."
           align="center"
         />
 

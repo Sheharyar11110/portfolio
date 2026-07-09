@@ -17,16 +17,15 @@ const HorizontalShowcase = lazy(() => import('./sections/HorizontalShowcase'))
 const Skills = lazy(() => import('./sections/Skills'))
 const Projects = lazy(() => import('./sections/Projects'))
 const Experience = lazy(() => import('./sections/Experience'))
-const Testimonials = lazy(() => import('./sections/Testimonials'))
+const Education = lazy(() => import('./sections/Education'))
 const Contact = lazy(() => import('./sections/Contact'))
 
 const marqueeItems = [
   'Full Stack Developer',
   'Python · FastAPI',
   'Docker · Redis · Kafka',
-  'PostgreSQL',
-  'AI Agents',
-  'React',
+  'PostgreSQL · AWS',
+  'React · Tailwind CSS',
   'Sheharyar Liaqat',
 ]
 
@@ -54,7 +53,7 @@ function AppContent() {
           <Skills />
           <Projects />
           <Experience />
-          <Testimonials />
+          <Education />
           <Contact />
         </Suspense>
       </main>

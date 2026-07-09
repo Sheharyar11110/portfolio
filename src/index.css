@@ -241,4 +241,17 @@
   .img-reveal {
     clip-path: inset(0 0 0 0);
   }
+
+  .project-card {
+    --project-accent: var(--theme-fg);
+    transition:
+      border-color 0.45s ease,
+      box-shadow 0.45s ease,
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .project-card:hover {
+    border-color: color-mix(in srgb, var(--project-accent) 45%, var(--theme-border));
+    box-shadow: 0 24px 48px -24px color-mix(in srgb, var(--project-accent) 30%, transparent);
+  }
 }

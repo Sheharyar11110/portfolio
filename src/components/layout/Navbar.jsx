@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Sun, Moon } from 'lucide-react'
+import { Menu, X, Sun, Moon, FileDown } from 'lucide-react'
 import { navLinks } from '../../data/navigation'
 import { profile } from '../../data/profile'
 import { useTheme } from '../../context/ThemeContext'
@@ -72,6 +72,16 @@ export default function Navbar({ onOpenCommand }) {
               {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
             </button>
             <motion.a
+              href={profile.cv}
+              download="SheharyarCV.pdf"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              className="btn-outline text-xs px-5 py-2.5 hidden lg:inline-flex items-center gap-2"
+            >
+              <FileDown size={14} />
+              CV
+            </motion.a>
+            <motion.a
               href="#contact"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
@@ -118,6 +128,20 @@ export default function Navbar({ onOpenCommand }) {
                   </a>
                 </motion.li>
               ))}
+              <motion.li
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.07 }}
+              >
+                <a
+                  href={profile.cv}
+                  download="SheharyarCV.pdf"
+                  onClick={() => setMobileOpen(false)}
+                  className="font-display text-4xl font-semibold tracking-display"
+                >
+                  Download CV
+                </a>
+              </motion.li>
             </ul>
           </motion.div>
         )}

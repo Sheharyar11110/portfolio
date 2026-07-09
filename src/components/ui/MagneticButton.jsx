@@ -8,6 +8,7 @@ export default function MagneticButton({
   onClick,
   href,
   type = 'button',
+  download,
   ...props
 }) {
   const ref = useRef(null)
@@ -43,7 +44,7 @@ export default function MagneticButton({
 
   if (href) {
     return (
-      <a href={href} onClick={onClick} className="inline-block">
+      <a href={href} onClick={onClick} download={download} className="inline-block">
         {inner}
       </a>
     )

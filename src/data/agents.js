@@ -1,62 +1,38 @@
 export const aiAgents = [
   {
-    id: 'orchestrator',
-    name: 'Orchestrator Agent',
-    role: 'Multi-agent coordinator',
+    id: 'healthcare',
+    name: 'Healthcare Diagnosis AI',
+    role: 'Medical image analysis',
     description:
-      'Routes tasks across specialized agents via FastAPI gateway. Redis for session memory, Kafka for async job queues.',
-    color: '#7c5cff',
-    icon: '🧠',
-    stack: ['FastAPI', 'Redis', 'Kafka'],
-    image:
-      'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80&auto=format&fit=crop',
-  },
-  {
-    id: 'research',
-    name: 'Research Agent',
-    role: 'Deep web intelligence',
-    description:
-      'Python workers scrape, embed, and summarize — results stored in PostgreSQL with vector search via Redis cache.',
+      'AI-powered platform for medical image analysis and disease detection — REST APIs for image processing, deep learning inference with TensorFlow/PyTorch, and automated report generation.',
     color: '#22d3ee',
-    icon: '🔍',
-    stack: ['Python', 'PostgreSQL', 'Redis'],
+    icon: '🏥',
+    stack: ['FastAPI', 'TensorFlow', 'PyTorch', 'PostgreSQL'],
     image:
-      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80&auto=format&fit=crop',
-  },
-  {
-    id: 'code',
-    name: 'Code Agent',
-    role: 'Dev automation',
-    description:
-      'Reviews PRs and generates tests. Dockerized sandbox runners, FastAPI webhooks, and Kafka-triggered CI pipelines.',
-    color: '#34d399',
-    icon: '⚡',
-    stack: ['FastAPI', 'Docker', 'Kafka'],
-    image:
-      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80&auto=format&fit=crop',
   },
   {
     id: 'support',
-    name: 'Support Agent',
-    role: '24/7 customer AI',
+    name: 'Customer Support AI',
+    role: 'LLM-powered chat',
     description:
-      'Context-aware chatbot with CRM sync over WebSockets. PostgreSQL conversation history, Redis rate limiting.',
-    color: '#f472b6',
+      'Intelligent customer support with real-time chat, conversation management, knowledge retrieval, and LLM-based automated responses with analytics dashboards.',
+    color: '#34d399',
     icon: '💬',
-    stack: ['FastAPI', 'PostgreSQL', 'Redis'],
+    stack: ['FastAPI', 'OpenAI', 'Redis', 'PostgreSQL'],
     image:
       'https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=1200&q=80&auto=format&fit=crop',
   },
   {
-    id: 'analytics',
-    name: 'Analytics Agent',
-    role: 'Data insights',
+    id: 'wedx-pipeline',
+    name: 'WedX Event Pipeline',
+    role: 'Real-time event processing',
     description:
-      'Natural language → SQL over PostgreSQL. Kafka streams ingest events; Python + FastAPI serves charts in real time.',
-    color: '#fb923c',
-    icon: '📊',
-    stack: ['Python', 'PostgreSQL', 'Kafka'],
+      'High-throughput event management with Kafka-based processing, Redis caching, real-time notifications, and role-based authentication deployed on AWS.',
+    color: '#c084fc',
+    icon: '⚡',
+    stack: ['Kafka', 'Redis', 'FastAPI', 'AWS'],
     image:
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1519741497674-611481863552?w=1200&q=80&auto=format&fit=crop',
   },
 ]

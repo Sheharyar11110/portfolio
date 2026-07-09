@@ -5,10 +5,10 @@ import SectionHeading from '../components/ui/SectionHeading'
 import { Stagger, StaggerItem } from '../components/ui/Reveal'
 
 const features = [
-  { icon: Bot, title: 'Multi-Agent', desc: 'Orchestrated workflows with memory & tools' },
-  { icon: Zap, title: 'Real-time', desc: 'WebSocket streams & live token analytics' },
-  { icon: Shield, title: 'Secure', desc: 'RBAC, audit logs, rate limiting' },
-  { icon: GitBranch, title: 'Integrable', desc: 'REST, webhooks, MCP server support' },
+  { icon: Bot, title: 'Healthcare AI', desc: 'Medical image analysis with TensorFlow & PyTorch' },
+  { icon: Zap, title: 'Real-time', desc: 'Kafka pipelines, Redis caching & live notifications' },
+  { icon: Shield, title: 'Secure', desc: 'Role-based auth, audit logs & AWS deployment' },
+  { icon: GitBranch, title: 'LLM-powered', desc: 'OpenAI integration & automated support workflows' },
 ]
 
 export default function AIAgents() {
@@ -19,7 +19,7 @@ export default function AIAgents() {
           index="02"
           label="AI Systems"
           title="Intelligent agents that work for you"
-          description="Production-ready orchestration with FastAPI, Redis, Kafka, and PostgreSQL — deployed with Docker."
+          description="AI healthcare diagnosis, LLM customer support, and event pipelines — built with FastAPI, Redis, Kafka, and PostgreSQL on AWS."
         />
 
         <Stagger className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border mb-16" stagger={0.08}>

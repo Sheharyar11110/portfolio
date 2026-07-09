@@ -35,8 +35,18 @@ function TimelineItem({ item, index }) {
       <h3 className="font-display text-lg md:text-xl font-semibold mt-2 group-hover:translate-x-1 transition-transform">
         {item.role}
       </h3>
-      <p className="text-sm text-fg-muted mt-1">{item.company}</p>
-      <p className="mt-4 text-fg-muted leading-relaxed text-sm max-w-lg">{item.description}</p>
+      <p className="text-sm text-fg-muted mt-1">
+        {item.company}
+        {item.location && <span className="text-fg-subtle"> · {item.location}</span>}
+      </p>
+      <ul className="mt-4 space-y-2 text-fg-muted leading-relaxed text-sm max-w-lg list-none">
+        {item.highlights.map((point) => (
+          <li key={point} className="flex gap-3">
+            <span className="w-1 h-1 bg-fg-subtle shrink-0 mt-2" />
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
     </motion.div>
   )
 }
@@ -49,7 +59,7 @@ export default function Experience() {
           index="05"
           label="Career"
           title="Experience & impact"
-          description="Building full-stack products and AI systems for clients worldwide."
+          description="Full-stack development at Devstrix, with backend and frontend internships at CitrusBits and TechInsects."
         />
         <div className="lg:pt-4">
           {experience.map((item, i) => (

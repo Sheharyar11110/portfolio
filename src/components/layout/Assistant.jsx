@@ -4,13 +4,14 @@ import { Bot, X } from 'lucide-react'
 import { profile } from '../../data/profile'
 
 const replies = {
-  default: `Hi! I'm ${profile.shortName}'s assistant. Ask about AI agents, full-stack work, or how to hire him.`,
-  agent: 'Sheharyar builds multi-agent systems with LangChain, OpenAI, RAG, and custom MCP integrations. Check the AI Agents section!',
-  stack: 'Python, FastAPI, Docker, Redis, Kafka, PostgreSQL — plus React, Three.js, NestJS, and AI agents. See Skills.',
+  default: `Hi! I'm ${profile.shortName}'s assistant. Ask about his experience, projects, skills, or how to hire him.`,
+  agent: 'Sheharyar has built AI healthcare diagnosis and LLM-powered customer support systems. Check the AI Agents and Projects sections!',
+  stack: 'Python, FastAPI, React, PostgreSQL, Redis, Kafka, Docker, AWS — plus TensorFlow, PyTorch, and LLM APIs. See Skills.',
   backend:
-    'Sheharyar builds production backends with FastAPI, event-driven Kafka pipelines, Redis caching, PostgreSQL, and Docker deployments.',
-  contact: `Email ${profile.email} or use the contact form. He's available for remote work worldwide.`,
-  project: 'See AgentFlow OS, Nexus Commerce, and more in the Projects section — all full-stack + AI.',
+    'Sheharyar builds production backends with FastAPI, event-driven Kafka pipelines, Redis caching, PostgreSQL, and Docker deployments on AWS.',
+  contact: `Email ${profile.email}, call ${profile.phone}, or use the contact form. Download his CV from the navbar or hero section.`,
+  project: 'See WedX, AI Healthcare Diagnosis, and Intelligent Customer Support in the Projects section.',
+  experience: 'Currently Full Stack Developer at Devstrix. Previously backend intern at CitrusBits and frontend intern at TechInsects.',
 }
 
 function getReply(msg) {
@@ -19,8 +20,10 @@ function getReply(msg) {
   if (lower.includes('backend') || lower.includes('fastapi') || lower.includes('kafka') || lower.includes('docker'))
     return replies.backend
   if (lower.includes('skill') || lower.includes('tech') || lower.includes('stack')) return replies.stack
-  if (lower.includes('contact') || lower.includes('hire') || lower.includes('email')) return replies.contact
-  if (lower.includes('project') || lower.includes('work')) return replies.project
+  if (lower.includes('contact') || lower.includes('hire') || lower.includes('email') || lower.includes('cv') || lower.includes('resume'))
+    return replies.contact
+  if (lower.includes('experience') || lower.includes('devstrix') || lower.includes('intern')) return replies.experience
+  if (lower.includes('project') || lower.includes('work') || lower.includes('wedx')) return replies.project
   return replies.default
 }
 
